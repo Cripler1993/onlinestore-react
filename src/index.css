@@ -133,9 +133,49 @@
   color: rgb(117, 120, 124);
   cursor: pointer;
 }
+.drop__btn-active {
+  color: black;
+  font-weight: 700;
+}
 .drop__icon {
   transition: all 0.4s ease 0s;
 }
 .rotate__icon {
   transform: rotate(180deg);
+}
+/* фильтр справа */
+
+.catalog__filter {
+  position: relative;
+}
+.catalog__filter-row {
+  display: flex;
+  column-gap: 6px;
+}
+.catalog__filter-list {
+  width: 267px;
+  position: absolute;
+  right: 0px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+}
+.catalog__filter-title {
+  font-size: 14px;
+  transition: all 0.4s ease 0s;
+  cursor: pointer;
+}
+.filter__active {
+  color: rgb(255, 198, 101);
+}
+.catalog__filter-title:hover {
+  color: rgb(255, 198, 101);
+}
+.filter__btn {
+  background: none;
+  margin-bottom: 10px;
+  cursor: pointer;
 }

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { categoryArr } from "../utiles/constants";
 
-export default function DropDown() {
+export default function DropDown({ category, setCategory }) {
   const [isOpen, setIsOpen] = useState(false);
-  let rotateIcon = isOpen && "rotate__icon";
+  let rotateIcon = isOpen ? "rotate__icon" : "";
   function handleOpen() {
     setIsOpen((prev) => !prev);
   }
@@ -19,8 +20,8 @@ export default function DropDown() {
             fill="none"
           >
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M8.00039 9.59203L3.70328 5.29492L2.28906 6.70914L8.00039 12.4205L13.7117 6.70914L12.2975 5.29492L8.00039 9.59203Z"
               fill="#000"
             />
@@ -29,10 +30,21 @@ export default function DropDown() {
       </div>
       {isOpen && (
         <div className="drop__content">
-          <button className="drop__btn">вся продукция</button>
-          <button className="drop__btn">вся продукция</button>
-          <button className="drop__btn">вся продукция</button>
-          <button className="drop__btn">вся продукция</button>
+          {categoryArr.map(function (elem) {
+            return (
+              <button
+                onClick={() => setCategory(elem)}
+                className={
+                  category.value == elem.value
+                    ? "drop__btn drop__btn-active"
+                    : "drop__btn"
+                }
+                key={elem.value}
+              >
+                {elem.label}
+              </button>
+            );
+          })}
         </div>
       )}
     </div>

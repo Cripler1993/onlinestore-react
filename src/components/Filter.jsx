@@ -1,10 +1,10 @@
 import React from "react";
 import DropDown from "./DropDown";
 
-export default function Filter() {
+export default function Filter({ category, setCategory }) {
   return (
     <div className="filter">
-      <DropDown />
+      <DropDown category={category} setCategory={setCategory} />
     </div>
   );
 }
