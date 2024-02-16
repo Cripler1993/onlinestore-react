@@ -9,13 +9,27 @@ const categoryArr = [
 ];
 
 const filterArr = [
-  { label: "по умолчанию", value: "" },
-  { label: "сначала популярные", value: "" },
-  { label: "сначала новинки", value: "" },
-  { label: "по цене: от меньшей к большей", value: "" },
-  { label: "по цене: от большей к меньшей", value: "" },
-  { label: "по алфавиту: а-я", value: "" },
-  { label: "по алфавиту: я-а", value: "" },
+  { label: "по умолчанию", value: { sortBy: "", order: "" } },
+  { label: "сначала популярные", value: { sortBy: "rate", order: "desc" } },
+  { label: "по размеру скидки", value: { sortBy: "sale", order: "desc" } },
+  {
+    label: "по цене: от меньшей к большей",
+    value: { sortBy: "price", order: "asc" },
+  },
+  {
+    label: "по цене: от большей к меньшей",
+    value: { sortBy: "price", order: "desc" },
+  },
+  { label: "по алфавиту: а-я", value: { sortBy: "name", order: "asc" } },
+  { label: "по алфавиту: я-а", value: { sortBy: "name", order: "desc" } },
 ];
 
-export { categoryArr, filterArr };
+const tagsArr = [
+  { label: "new", value: "" },
+  { label: "popular", value: "" },
+  { label: "razz", value: "" },
+  { label: "vegan", value: "" },
+  { label: "classic", value: "" },
+];
+
+export { categoryArr, filterArr, tagsArr };

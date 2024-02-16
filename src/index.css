@@ -20,6 +20,7 @@
   justify-content: space-between;
   align-items: flex-end;
   height: 56px;
+  margin-bottom: 24px;
 }
 .catalog__row {
   display: flex;
@@ -151,6 +152,7 @@
 .catalog__filter-row {
   display: flex;
   column-gap: 6px;
+  transition: all 0.4s ease 0s;
 }
 .catalog__filter-list {
   width: 267px;
@@ -165,17 +167,39 @@
 }
 .catalog__filter-title {
   font-size: 14px;
-  transition: all 0.4s ease 0s;
+
   cursor: pointer;
 }
 .filter__active {
   color: rgb(255, 198, 101);
 }
-.catalog__filter-title:hover {
+.catalog__filter-row:hover {
   color: rgb(255, 198, 101);
+}
+.filter__active svg {
+  fill: rgb(255, 198, 101);
+}
+.catalog__filter-row:hover svg {
+  fill: rgb(255, 198, 101);
+}
+.filter__icon {
+  transition: all 0.4s ease 0s;
 }
 .filter__btn {
   background: none;
   margin-bottom: 10px;
   cursor: pointer;
+}
+/* поле тегов */
+.tags__row {
+  display: flex;
+  column-gap: 8px;
+}
+.tag {
+  cursor: pointer;
+  padding: 8px 12px;
+  background-color: rgb(243, 244, 244);
+}
+.tag__active {
+  background-color: rgb(241, 181, 80);
 }

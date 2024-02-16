@@ -2,28 +2,24 @@ import React, { useState } from "react";
 import { filterArr } from "../utiles/constants";
 
 export default function SortDropDown({ filter, setFilter }) {
-  const [isOpen, setIsOpen] = useState("false");
+  const [isOpen, setIsOpen] = useState(false);
   function handleOpen() {
     setIsOpen((prev) => !prev);
   }
   return (
     <div onClick={handleOpen} className="catalog__filter">
-      <div className="catalog__filter-row">
-        <p
-          className={
-            isOpen
-              ? "catalog__filter-title filter__active"
-              : "catalog__filter-title"
-          }
-        >
-          {filter.label}
-        </p>
+      <div
+        className={
+          isOpen ? "catalog__filter-row filter__active" : "catalog__filter-row"
+        }
+      >
+        <p className="catalog__filter-title">{filter.label}</p>
         <svg
           width="18"
           height="15"
           viewBox="0 0 19 16"
           fill=""
-          class=""
+          class="filter__icon"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path

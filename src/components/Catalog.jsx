@@ -2,8 +2,16 @@ import React, { useState } from "react";
 import CatalogItem from "./CatalogItem";
 import { filterArr } from "../utiles/constants";
 import SortDropDown from "./SortDropDown";
+import Tags from "./Tags";
 
-export default function Catalog({ products, category, filter, setFilter }) {
+export default function Catalog({
+  products,
+  category,
+  filter,
+  setFilter,
+  handleActive,
+  activeTags,
+}) {
   return (
     <div className="catalog">
       <div className="catalog__top">
@@ -14,6 +22,9 @@ export default function Catalog({ products, category, filter, setFilter }) {
         <div>
           <SortDropDown filter={filter} setFilter={setFilter} />
         </div>
+      </div>
+      <div>
+        <Tags handleActive={handleActive} activeTags={activeTags} />
       </div>
       <div className="catalog__body">
         {products.map(function (elem) {
