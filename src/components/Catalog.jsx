@@ -11,6 +11,7 @@ export default function Catalog({
   setFilter,
   handleActive,
   activeTags,
+  activeClass,
 }) {
   return (
     <div className="catalog">
@@ -24,7 +25,7 @@ export default function Catalog({
         </div>
       </div>
       <div>
-        <Tags handleActive={handleActive} activeTags={activeTags} />
+        <Tags handleActive={handleActive} activeClass={activeClass} />
       </div>
       <div className="catalog__body">
         {products.map(function (elem) {

@@ -12,12 +12,29 @@ export default function Home() {
   const [activeTags, setActiveTags] = useState([]);
 
   function handleActive(elem) {
-    setActiveTags((prev) => [
-      ...prev,
-      { label: elem.label, value: elem.value },
-    ]);
+    if (activeClass(elem)) {
+      setActiveTags((prev) =>
+        prev.filter(function (element) {
+          if (prev.length > 1) {
+            return element.label != elem.label;
+          } else {
+            prev = [];
+          }
+        })
+      );
+    } else {
+      setActiveTags((prev) => [
+        ...prev,
+        { label: elem.label, value: elem.value },
+      ]);
+    }
   }
   console.log(activeTags);
+  function activeClass(elem) {
+    return activeTags.find(function (element) {
+      return elem.label == element.label;
+    });
+  }
   useEffect(() => {
     fetch(
       `https://65524c665c69a7790329d96f.mockapi.io/products?category=${category.value}&sortBy=${filter.value.sortBy}&order=${filter.value.order}`
@@ -37,7 +54,7 @@ export default function Home() {
             filter={filter}
             setFilter={setFilter}
             handleActive={handleActive}
-            activeTags={activeTags}
+            activeClass={activeClass}
           />
         </main>
       </div>

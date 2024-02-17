@@ -197,6 +197,7 @@
 }
 .tag {
   cursor: pointer;
+  transition: all 0.2s ease 0s;
   padding: 8px 12px;
   background-color: rgb(243, 244, 244);
 }
