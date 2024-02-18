@@ -1,0 +1,57 @@
+import React, { useState } from "react";
+
+export default function Search() {
+  const [text, setText] = useState("");
+  return (
+    <div>
+      <svg
+        width="24"
+        height="24"
+        fill="black"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M14.783 6.471a5.877 5.877 0 10-8.312 8.312 5.877 5.877 0 008.312-8.312zm-9.372-1.06a7.377 7.377 0 0110.937 9.876l4.182 4.183-1.06 1.06-4.183-4.182A7.378 7.378 0 015.411 5.41z"
+        ></path>
+      </svg>
+      <div className="search__row">
+        <svg
+          width="24"
+          height="24"
+          fill="rgb(202, 205, 208)"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M14.783 6.471a5.877 5.877 0 10-8.312 8.312 5.877 5.877 0 008.312-8.312zm-9.372-1.06a7.377 7.377 0 0110.937 9.876l4.182 4.183-1.06 1.06-4.183-4.182A7.378 7.378 0 015.411 5.41z"
+          ></path>
+        </svg>
+        <div>
+          <input
+            onChange={(e) => setText(e.target.value)}
+            value={text}
+            type="text"
+            placeholder="слойка, торт, кекс..."
+          />
+        </div>
+        <div className="search__close">
+          <svg
+            width="16"
+            height="16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity="0.5"
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M6.94 8L2.803 3.863l1.06-1.06L8 6.939l4.137-4.136 1.06 1.06L9.061 8l4.136 4.136-1.06 1.06L8 9.06l-4.136 4.137-1.06-1.06L6.94 8z"
+              fill="#75787C"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+  );
+}

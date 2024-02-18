@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import CatalogItem from "./CatalogItem";
-import { filterArr } from "../utiles/constants";
 import SortDropDown from "./SortDropDown";
 import Tags from "./Tags";
 
@@ -10,7 +9,6 @@ export default function Catalog({
   filter,
   setFilter,
   handleActive,
-  activeTags,
   activeClass,
 }) {
   return (

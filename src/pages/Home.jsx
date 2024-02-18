@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import Filter from "../components/Filter";
 import Catalog from "../components/Catalog";
 import Footer from "../components/Footer";
-import { categoryArr, filterArr, tagsArr } from "../utiles/constants";
+import { categoryArr, filterArr } from "../utiles/constants";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -29,7 +29,7 @@ export default function Home() {
       ]);
     }
   }
-  console.log(activeTags);
+
   function activeClass(elem) {
     return activeTags.find(function (element) {
       return elem.label == element.label;
