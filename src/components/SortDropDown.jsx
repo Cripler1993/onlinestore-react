@@ -19,7 +19,7 @@ export default function SortDropDown({ filter, setFilter }) {
           height="15"
           viewBox="0 0 19 16"
           fill=""
-          class="filter__icon"
+          className="filter__icon"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path

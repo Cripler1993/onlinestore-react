@@ -10,23 +10,17 @@ export default function Home() {
   const [category, setCategory] = useState(categoryArr[0]);
   const [filter, setFilter] = useState(filterArr[0]);
   const [activeTags, setActiveTags] = useState([]);
+  const [text, setText] = useState("");
 
   function handleActive(elem) {
     if (activeClass(elem)) {
       setActiveTags((prev) =>
         prev.filter(function (element) {
-          if (prev.length > 1) {
-            return element.label != elem.label;
-          } else {
-            prev = [];
-          }
+          return element != elem;
         })
       );
     } else {
-      setActiveTags((prev) => [
-        ...prev,
-        { label: elem.label, value: elem.value },
-      ]);
+      setActiveTags((prev) => [...prev, elem]);
     }
   }
 
@@ -44,7 +38,7 @@ export default function Home() {
   }, [category, filter]);
   return (
     <>
-      <Header />
+      <Header text={text} setText={setText} />
       <div className="container">
         <main className="main__row">
           <Filter category={category} setCategory={setCategory} />
@@ -55,6 +49,8 @@ export default function Home() {
             setFilter={setFilter}
             handleActive={handleActive}
             activeClass={activeClass}
+            text={text}
+            activeTags={activeTags}
           />
         </main>
       </div>

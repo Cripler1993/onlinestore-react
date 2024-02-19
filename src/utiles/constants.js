@@ -24,12 +24,6 @@ const filterArr = [
   { label: "по алфавиту: я-а", value: { sortBy: "name", order: "desc" } },
 ];
 
-const tagsArr = [
-  { label: "new", value: "" },
-  { label: "popular", value: "" },
-  { label: "razz", value: "" },
-  { label: "vegan", value: "" },
-  { label: "classic", value: "" },
-];
+const tagsArr = ["new", "popular", "razz", "vegan", "classic"];
 
 export { categoryArr, filterArr, tagsArr };
