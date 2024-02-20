@@ -16,6 +16,9 @@ export default function Search({ text, setText }) {
         height="24"
         fill="black"
         xmlns="http://www.w3.org/2000/svg"
+        className={
+          !isOpen ? "search__icon" : "search__icon search__icon-active"
+        }
       >
         <path
           clipRule="evenodd"
