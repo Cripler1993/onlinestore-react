@@ -15,16 +15,18 @@ export default function Catalog({
   activeTags,
 }) {
   function filterProducts(arr) {
-    return arr
-      .filter(function (elem) {
-        return (
-          elem.description.toLowerCase().includes(text.toLowerCase()) ||
-          elem.name.toLowerCase().includes(text.toLowerCase())
-        );
-      })
-      .filter(function (elem) {
-        // return ()
+    let searchArr = arr.filter(function (elem) {
+      return (
+        elem.description.toLowerCase().includes(text.toLowerCase()) ||
+        elem.name.toLowerCase().includes(text.toLowerCase())
+      );
+    });
+    if (activeTags.length > 0) {
+      return searchArr.filter(function (elem) {
+        return _.isEqual(activeTags, elem.tags);
       });
+    }
+    return searchArr;
   }
   let filteredProducts = filterProducts(products);
   return (

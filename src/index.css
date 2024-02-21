@@ -25,7 +25,7 @@ header {
 }
 .header__right {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   column-gap: 16px;
 }
 .header__right svg {
@@ -97,6 +97,9 @@ header {
   transition: all 0.4s ease 0s;
 }
 .cart__icon:hover {
+  fill: rgb(255, 198, 101);
+}
+.cart__icon:hover path {
   fill: rgb(255, 198, 101);
 }
 .cart__icon-active {

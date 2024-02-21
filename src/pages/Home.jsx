@@ -12,6 +12,13 @@ export default function Home() {
   const [activeTags, setActiveTags] = useState([]);
   const [text, setText] = useState("");
 
+  function clearFilters() {
+    setCategory(categoryArr[0]);
+    setFilter(filterArr[0]);
+    setActiveTags([]);
+    setText("");
+  }
+
   function handleActive(elem) {
     if (activeClass(elem)) {
       setActiveTags((prev) =>
@@ -26,7 +33,7 @@ export default function Home() {
 
   function activeClass(elem) {
     return activeTags.find(function (element) {
-      return elem.label == element.label;
+      return elem == element;
     });
   }
   useEffect(() => {
@@ -41,7 +48,11 @@ export default function Home() {
       <Header text={text} setText={setText} />
       <div className="container">
         <main className="main__row">
-          <Filter category={category} setCategory={setCategory} />
+          <Filter
+            category={category}
+            setCategory={setCategory}
+            clearFilters={clearFilters}
+          />
           <Catalog
             products={products}
             category={category}
