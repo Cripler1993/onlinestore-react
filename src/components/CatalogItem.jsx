@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function CatalogItem({ elem }) {
   return (
     <div className="catalog__item">
       <div className="catalog__img">
-        <img src={elem.img[0]} alt="" />
+        <Link to={`/product/${elem.id}`}>
+          <img src={elem.img[0]} alt="" />
+        </Link>
         <div className="catalog__svg">
           <svg
             width="24"

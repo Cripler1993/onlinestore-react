@@ -1,5 +1,130 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import loadScreen from "../assets/images.jfif";
 
 export default function FullProduct() {
-  return <div>FullProduct</div>;
+  const [isOpenNutrition, setIsopenNutrition] = useState(false);
+  const [isOpenConsist, setIsopenConsist] = useState(false);
+  const [product, setProduct] = useState({
+    name: "",
+    description: "",
+    img: [loadScreen],
+    price: "",
+    consist: "",
+    nutrition_facts: ["", "", "", ""],
+    serving_size: "",
+  });
+  const { id } = useParams();
+  console.log(id);
+
+  useEffect(() => {
+    fetch(`https://65524c665c69a7790329d96f.mockapi.io/products/${id}`)
+      .then((res) => res.json())
+      .then((json) => setProduct(json));
+  }, []);
+
+  console.log(product);
+
+  function handleOpenNutrition() {
+    setIsopenNutrition((prev) => !prev);
+  }
+
+  function handleOpenConsist() {
+    setIsopenConsist((prev) => !prev);
+  }
+  return (
+    <div className="container">
+      <div className="full__product-row">
+        <div className="full__product-left">
+          <img src={product.img[0]} alt="" />
+        </div>
+        <div className="full__product-right">
+          <div className="product__right-header">
+            <p>главная</p>
+            <p className="header__triangle"></p>
+            <p>продукция</p>
+            <p className="header__triangle"></p>
+            <p>{product.name}</p>
+          </div>
+          <div className="product__right-title">
+            <p>{product.name}</p>
+            <p>{product.serving_size}</p>
+          </div>
+          <div className="product__right-description">
+            <p>{product.description}</p>
+          </div>
+          <div
+            onClick={handleOpenNutrition}
+            className="product__right-nutritionFacts"
+          >
+            <p>пищевая ценность на 100 г</p>
+            <p
+              className={
+                !isOpenNutrition ? "triangle" : "triangle triangle__active"
+              }
+            ></p>
+          </div>
+          {isOpenNutrition && (
+            <div className="nutrition__facts-full">
+              <div className="nutrition__facts-item">
+                <p>калорийность</p>
+                <p>{product.nutrition_facts[0]}</p>
+              </div>
+              <div className="nutrition__facts-item">
+                <p>белки</p>
+                <p>{product.nutrition_facts[1]}</p>
+              </div>
+              <div className="nutrition__facts-item">
+                <p>жиры</p>
+                <p>{product.nutrition_facts[2]}</p>
+              </div>
+              <div className="nutrition__facts-item">
+                <p>углеводы</p>
+                <p>{product.nutrition_facts[3]}</p>
+              </div>
+            </div>
+          )}
+          <div onClick={handleOpenConsist} className="product__right-consist">
+            <p>состав</p>
+            <p
+              className={
+                !isOpenConsist ? "triangle" : "triangle triangle__active"
+              }
+            ></p>
+          </div>
+          {isOpenConsist && (
+            <div className="consist__full">{product.consist}</div>
+          )}
+          <div className="full__product-footer">
+            <div className="product__footer-counter">
+              <svg
+                width="24"
+                height="24"
+                fill="#000"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path stroke="#0E0E0E" d="M5 12h14"></path>
+              </svg>
+              <span>1</span>
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 5v14m-7-7h14"
+                  stroke="#0E0E0E"
+                  stroke-width="1.5"
+                ></path>
+              </svg>
+            </div>
+            <div className="product__footer-btn">
+              <button>{product.price}₽ в корзину</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

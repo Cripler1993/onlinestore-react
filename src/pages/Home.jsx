@@ -11,6 +11,7 @@ export default function Home() {
   const [filter, setFilter] = useState(filterArr[0]);
   const [activeTags, setActiveTags] = useState([]);
   const [text, setText] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   function clearFilters() {
     setCategory(categoryArr[0]);
@@ -38,11 +39,14 @@ export default function Home() {
   }
   useEffect(() => {
     fetch(
-      `https://65524c665c69a7790329d96f.mockapi.io/products?category=${category.value}&sortBy=${filter.value.sortBy}&order=${filter.value.order}`
+      `https://65524c665c69a7790329d96f.mockapi.io/products?category=${category.value}&sortBy=${filter.value.sortBy}&order=${filter.value.order}&page=${currentPage}&limit=6`
     )
       .then((res) => res.json())
-      .then((json) => setProducts(json));
-  }, [category, filter]);
+      .then((json) => {
+        console.log(json);
+        setProducts(json);
+      });
+  }, [category, filter, currentPage]);
   return (
     <>
       <Header text={text} setText={setText} />
@@ -64,6 +68,21 @@ export default function Home() {
             activeTags={activeTags}
           />
         </main>
+        <div>
+          <button
+            disabled={currentPage == 1}
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+          >
+            {"<"}
+          </button>
+          <span>{currentPage}</span>
+          <button
+            disabled={currentPage == 4}
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+          >
+            {">"}
+          </button>
+        </div>
       </div>
       <Footer />
     </>
