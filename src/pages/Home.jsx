@@ -66,23 +66,10 @@ export default function Home() {
             activeClass={activeClass}
             text={text}
             activeTags={activeTags}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
           />
         </main>
-        <div>
-          <button
-            disabled={currentPage == 1}
-            onClick={() => setCurrentPage((prev) => prev - 1)}
-          >
-            {"<"}
-          </button>
-          <span>{currentPage}</span>
-          <button
-            disabled={currentPage == 4}
-            onClick={() => setCurrentPage((prev) => prev + 1)}
-          >
-            {">"}
-          </button>
-        </div>
       </div>
       <Footer />
     </>

@@ -309,6 +309,11 @@ header {
 .filter {
   width: 236px;
 }
+.clear__filter-btn {
+  margin-top: 20px;
+  font-size: 16px;
+  background: none;
+}
 .drop {
   width: 236px;
   border-bottom: 1px solid rgba(14, 14, 14, 0.08);
@@ -459,6 +464,7 @@ header {
 }
 .product__right-title p:first-child {
   font-size: 32px;
+  line-height: 36px;
 }
 .product__right-title p:last-child {
   font-size: 13px;
@@ -539,4 +545,51 @@ header {
   background: rgb(14, 14, 14);
   color: rgb(255, 255, 255);
   border-radius: 10px;
+}
+
+/* пагинация */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination__btn {
+  border: 1px solid rgb(202, 205, 208);
+  padding: 8px 12px;
+  border-radius: 10px;
+  background-color: white;
+  margin-left: 24px;
+}
+.pagination__btn svg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 8.5px;
+  height: 15px;
+}
+.rotate__svg {
+  transform: rotate(180deg);
+}
+.pagination__count {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+}
+.pagination__count p:nth-child(2) {
+  width: 40px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgb(202, 205, 208);
+  text-align: center;
+}
+
+/* footer */
+
+.footer {
+  margin-top: 80px;
+  background-color: black;
+  height: 300px;
+  color: white;
 }

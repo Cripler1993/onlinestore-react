@@ -3,6 +3,7 @@ import CatalogItem from "./CatalogItem";
 import SortDropDown from "./SortDropDown";
 import Tags from "./Tags";
 import * as _ from "lodash";
+import Pagination from "./Pagination";
 
 export default function Catalog({
   products,
@@ -13,6 +14,8 @@ export default function Catalog({
   activeClass,
   text,
   activeTags,
+  currentPage,
+  setCurrentPage,
 }) {
   function filterProducts(arr) {
     let searchArr = arr.filter(function (elem) {
@@ -47,6 +50,13 @@ export default function Catalog({
         {filteredProducts.map(function (elem) {
           return <CatalogItem key={elem.id} elem={elem} />;
         })}
+      </div>
+      <div>
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          filteredProducts={filteredProducts}
+        />
       </div>
     </div>
   );
