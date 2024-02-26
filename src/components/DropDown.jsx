@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { categoryArr } from "../utiles/constants";
 
-export default function DropDown({ category, setCategory }) {
+export default function DropDown({ category, setCategory, setCurrentPage }) {
   const [isOpen, setIsOpen] = useState(false);
   let rotateIcon = isOpen ? "rotate__icon" : "";
   function handleOpen() {
     setIsOpen((prev) => !prev);
+  }
+  function handleClick(elem) {
+    setCategory(elem);
+    setCurrentPage(1);
   }
   return (
     <div className="drop">
@@ -33,7 +37,7 @@ export default function DropDown({ category, setCategory }) {
           {categoryArr.map(function (elem) {
             return (
               <button
-                onClick={() => setCategory(elem)}
+                onClick={() => handleClick(elem)}
                 className={
                   category.value == elem.value
                     ? "drop__btn drop__btn-active"

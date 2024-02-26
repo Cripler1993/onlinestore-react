@@ -2,7 +2,7 @@ import React from "react";
 import Search from "./Search";
 import Cart from "./Cart";
 
-export default function Header({ text, setText }) {
+export default function Header({ text, setText, setCurrentPage }) {
   return (
     <header>
       <div className="container">
@@ -12,7 +12,11 @@ export default function Header({ text, setText }) {
             <p>продукция</p>
           </div>
           <div className="header__right">
-            <Search text={text} setText={setText} />
+            <Search
+              text={text}
+              setText={setText}
+              setCurrentPage={setCurrentPage}
+            />
             <div>
               <svg
                 width="20"

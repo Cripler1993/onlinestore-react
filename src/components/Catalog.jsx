@@ -16,6 +16,7 @@ export default function Catalog({
   activeTags,
   currentPage,
   setCurrentPage,
+  limit,
 }) {
   function filterProducts(arr) {
     let searchArr = arr.filter(function (elem) {
@@ -32,6 +33,9 @@ export default function Catalog({
     return searchArr;
   }
   let filteredProducts = filterProducts(products);
+  let start = limit * (currentPage - 1);
+  let finish = limit * currentPage;
+  let sliceArr = filteredProducts.slice(start, finish);
   return (
     <div className="catalog">
       <div className="catalog__top">
@@ -47,7 +51,7 @@ export default function Catalog({
         <Tags handleActive={handleActive} activeClass={activeClass} />
       </div>
       <div className="catalog__body">
-        {filteredProducts.map(function (elem) {
+        {sliceArr.map(function (elem) {
           return <CatalogItem key={elem.id} elem={elem} />;
         })}
       </div>
@@ -56,6 +60,7 @@ export default function Catalog({
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           filteredProducts={filteredProducts}
+          limit={limit}
         />
       </div>
     </div>

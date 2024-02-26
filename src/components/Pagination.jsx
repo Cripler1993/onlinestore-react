@@ -3,8 +3,10 @@ import React from "react";
 export default function Pagination({
   currentPage,
   setCurrentPage,
+  limit,
   filteredProducts,
 }) {
+  let maxPage = Math.ceil(filteredProducts.length / limit);
   return (
     <div className="pagination">
       <div className="pagination__btn-row">
@@ -30,7 +32,7 @@ export default function Pagination({
         </button>
         <button
           className="pagination__btn"
-          disabled={currentPage == 4}
+          disabled={currentPage == maxPage}
           onClick={() => setCurrentPage((prev) => prev + 1)}
         >
           <svg
@@ -51,7 +53,7 @@ export default function Pagination({
       <div className="pagination__count">
         <p>страница</p>
         <p>{currentPage}</p>
-        <p>из 4</p>
+        <p>из {maxPage}</p>
       </div>
     </div>
   );

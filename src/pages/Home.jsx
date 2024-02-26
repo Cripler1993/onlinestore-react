@@ -12,6 +12,7 @@ export default function Home() {
   const [activeTags, setActiveTags] = useState([]);
   const [text, setText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const limit = 6;
 
   function clearFilters() {
     setCategory(categoryArr[0]);
@@ -39,23 +40,24 @@ export default function Home() {
   }
   useEffect(() => {
     fetch(
-      `https://65524c665c69a7790329d96f.mockapi.io/products?category=${category.value}&sortBy=${filter.value.sortBy}&order=${filter.value.order}&page=${currentPage}&limit=6`
+      `https://65524c665c69a7790329d96f.mockapi.io/products?category=${category.value}&sortBy=${filter.value.sortBy}&order=${filter.value.order}`
     )
       .then((res) => res.json())
       .then((json) => {
         console.log(json);
         setProducts(json);
       });
-  }, [category, filter, currentPage]);
+  }, [category, filter]);
   return (
     <>
-      <Header text={text} setText={setText} />
+      <Header text={text} setText={setText} setCurrentPage={setCurrentPage} />
       <div className="container">
         <main className="main__row">
           <Filter
             category={category}
             setCategory={setCategory}
             clearFilters={clearFilters}
+            setCurrentPage={setCurrentPage}
           />
           <Catalog
             products={products}
@@ -68,6 +70,7 @@ export default function Home() {
             activeTags={activeTags}
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
+            limit={limit}
           />
         </main>
       </div>

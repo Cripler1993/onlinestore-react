@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 
-export default function Search({ text, setText }) {
+export default function Search({ text, setText, setCurrentPage }) {
   const [isOpen, setIsOpen] = useState(false);
   function openSearch() {
-    setIsOpen((prev) => (prev = true));
+    setIsOpen(true);
+    setCurrentPage(1);
   }
   function closeSearch() {
-    setIsOpen((prev) => (prev = false));
+    setIsOpen(false);
   }
   return (
     <div>
