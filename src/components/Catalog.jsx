@@ -4,6 +4,7 @@ import SortDropDown from "./SortDropDown";
 import Tags from "./Tags";
 import * as _ from "lodash";
 import Pagination from "./Pagination";
+import SkeletonItem from "./SkeletonItem";
 
 export default function Catalog({
   products,
@@ -17,6 +18,7 @@ export default function Catalog({
   currentPage,
   setCurrentPage,
   limit,
+  loading,
 }) {
   function filterProducts(arr) {
     let searchArr = arr.filter(function (elem) {
@@ -36,6 +38,8 @@ export default function Catalog({
   let start = limit * (currentPage - 1);
   let finish = limit * currentPage;
   let sliceArr = filteredProducts.slice(start, finish);
+
+  const skeleton = [...new Array(6)];
   return (
     <div className="catalog">
       <div className="catalog__top">
@@ -51,9 +55,13 @@ export default function Catalog({
         <Tags handleActive={handleActive} activeClass={activeClass} />
       </div>
       <div className="catalog__body">
-        {sliceArr.map(function (elem) {
-          return <CatalogItem key={elem.id} elem={elem} />;
-        })}
+        {loading
+          ? skeleton.map(function (elem, index) {
+              return <SkeletonItem key={index} />;
+            })
+          : sliceArr.map(function (elem) {
+              return <CatalogItem key={elem.id} elem={elem} />;
+            })}
       </div>
       <div>
         <Pagination

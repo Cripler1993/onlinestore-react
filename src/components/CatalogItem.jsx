@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { tagTranslate } from "../utiles/constants";
+import { Tooltip } from "@mui/material";
 
 export default function CatalogItem({ elem }) {
   return (
@@ -8,24 +10,26 @@ export default function CatalogItem({ elem }) {
         <Link to={`/product/${elem.id}`}>
           <img src={elem.img[0]} alt="" />
         </Link>
-        <div className="catalog__svg">
-          <svg
-            width="24"
-            height="24"
-            fill="rgb(240, 167, 45)"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clipRule="evenodd"
-              d="M12 3.25A2.75 2.75 0 009.25 6v.25h5.5V6A2.75 2.75 0 0012 3.25zm4.25 3V6a4.25 4.25 0 00-8.5 0v.25H4.83l-.074.667-1.5 13.5-.093.833H20.838l-.093-.833-1.5-13.5-.074-.667H16.25zm-1.5 1.5V10h1.5V7.75h1.579l1.333 12H4.838l1.333-12h1.58V10h1.5V7.75h5.5z"
-            ></path>
-          </svg>
-        </div>
+        <Tooltip title="добавить в корзину" arrow>
+          <div className="catalog__svg">
+            <svg
+              width="24"
+              height="24"
+              fill="rgb(240, 167, 45)"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clipRule="evenodd"
+                d="M12 3.25A2.75 2.75 0 009.25 6v.25h5.5V6A2.75 2.75 0 0012 3.25zm4.25 3V6a4.25 4.25 0 00-8.5 0v.25H4.83l-.074.667-1.5 13.5-.093.833H20.838l-.093-.833-1.5-13.5-.074-.667H16.25zm-1.5 1.5V10h1.5V7.75h1.579l1.333 12H4.838l1.333-12h1.58V10h1.5V7.75h5.5z"
+              ></path>
+            </svg>
+          </div>
+        </Tooltip>
         <div className="catalog__tags">
           {elem.tags.map(function (element, index) {
             return (
               <div className="catalog__tag" key={index}>
-                {element}
+                {tagTranslate[element]}
               </div>
             );
           })}

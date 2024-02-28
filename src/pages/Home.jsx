@@ -12,6 +12,7 @@ export default function Home() {
   const [activeTags, setActiveTags] = useState([]);
   const [text, setText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const limit = 6;
 
   function clearFilters() {
@@ -39,6 +40,7 @@ export default function Home() {
     });
   }
   useEffect(() => {
+    setLoading(true);
     fetch(
       `https://65524c665c69a7790329d96f.mockapi.io/products?category=${category.value}&sortBy=${filter.value.sortBy}&order=${filter.value.order}`
     )
@@ -46,6 +48,7 @@ export default function Home() {
       .then((json) => {
         console.log(json);
         setProducts(json);
+        setLoading(false);
       });
   }, [category, filter]);
   return (
@@ -71,6 +74,7 @@ export default function Home() {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
             limit={limit}
+            loading={loading}
           />
         </main>
       </div>

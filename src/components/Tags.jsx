@@ -1,5 +1,5 @@
 import React from "react";
-import { tagsArr } from "../utiles/constants";
+import { tagTranslate, tagsArr } from "../utiles/constants";
 
 export default function Tags({ handleActive, activeClass }) {
   return (
@@ -11,7 +11,7 @@ export default function Tags({ handleActive, activeClass }) {
             onClick={() => handleActive(elem)}
             className={activeClass(elem) ? "tag tag__active" : "tag"}
           >
-            {elem}
+            {tagTranslate[elem]}
           </button>
         );
       })}

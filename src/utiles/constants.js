@@ -26,4 +26,12 @@ const filterArr = [
 
 const tagsArr = ["new", "popular", "razz", "vegan", "classic"];
 
-export { categoryArr, filterArr, tagsArr };
+const tagTranslate = {
+  new: "новинка",
+  popular: "популярный",
+  razz: "малиновый",
+  vegan: "vegan",
+  classic: "классический",
+};
+
+export { categoryArr, filterArr, tagsArr, tagTranslate };

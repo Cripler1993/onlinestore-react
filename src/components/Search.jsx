@@ -4,11 +4,15 @@ export default function Search({ text, setText, setCurrentPage }) {
   const [isOpen, setIsOpen] = useState(false);
   function openSearch() {
     setIsOpen(true);
-    setCurrentPage(1);
   }
   function closeSearch() {
     setIsOpen(false);
   }
+  function handleChange(e) {
+    setCurrentPage(1);
+    setText(e.target.value);
+  }
+
   return (
     <div>
       <svg
@@ -42,7 +46,7 @@ export default function Search({ text, setText, setCurrentPage }) {
         </svg>
         <div className="search__input">
           <input
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e) => handleChange(e)}
             value={text}
             type="text"
             placeholder="слойка, торт, кекс..."
