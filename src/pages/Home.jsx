@@ -4,6 +4,7 @@ import Filter from "../components/Filter";
 import Catalog from "../components/Catalog";
 import Footer from "../components/Footer";
 import { categoryArr, filterArr } from "../utiles/constants";
+import axios from "axios";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -23,6 +24,7 @@ export default function Home() {
   }
 
   function handleActive(elem) {
+    setCurrentPage(1);
     if (activeClass(elem)) {
       setActiveTags((prev) =>
         prev.filter(function (element) {
@@ -41,13 +43,15 @@ export default function Home() {
   }
   useEffect(() => {
     setLoading(true);
-    fetch(
-      `https://65524c665c69a7790329d96f.mockapi.io/products?category=${category.value}&sortBy=${filter.value.sortBy}&order=${filter.value.order}`
-    )
-      .then((res) => res.json())
+    const params = new URLSearchParams();
+    params.append("category", category.value);
+    params.append("sortBy", filter.value.sortBy);
+    params.append("order", filter.value.order);
+    axios
+      .get(`https://65524c665c69a7790329d96f.mockapi.io/products`, { params })
       .then((json) => {
         console.log(json);
-        setProducts(json);
+        setProducts(json.data);
         setLoading(false);
       });
   }, [category, filter]);

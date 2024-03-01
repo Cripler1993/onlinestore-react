@@ -29,7 +29,7 @@ export default function Catalog({
     });
     if (activeTags.length > 0) {
       return searchArr.filter(function (elem) {
-        return _.isEqual(activeTags, elem.tags);
+        return _.isEqual(activeTags.sort(), elem.tags.sort());
       });
     }
     return searchArr;

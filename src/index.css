@@ -444,14 +444,16 @@ header {
   align-items: center;
   column-gap: 8px;
 }
-.product__right-header p {
-  font-size: 14px;
-}
-.btn {
+.product__right-link {
   color: black;
+}
+.product__right-link:hover {
+  color: rgb(255, 198, 101);
+  transition: all 0.2s ease 0s;
 }
 .product__right-header p:last-child {
   color: rgb(117, 120, 124);
+  font-size: 14px;
 }
 .header__triangle {
   margin-top: 3px;
@@ -652,4 +654,15 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Swiper */
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: black !important;
+}
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 18px !important;
 }

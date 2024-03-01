@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SkeletonFullProduct from "../components/SkeletonFullProduct";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import axios from "axios";
 
 export default function FullProduct() {
   const [isOpenNutrition, setIsopenNutrition] = useState(false);
@@ -8,14 +13,13 @@ export default function FullProduct() {
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-  console.log(id);
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://65524c665c69a7790329d96f.mockapi.io/products/${id}`)
-      .then((res) => res.json())
+    axios
+      .get(`https://65524c665c69a7790329d96f.mockapi.io/products/${id}`)
       .then((json) => {
-        setProduct(json);
+        setProduct(json.data);
         setLoading(false);
       });
   }, []);
@@ -36,12 +40,20 @@ export default function FullProduct() {
       ) : (
         <div className="full__product-row">
           <div className="full__product-left">
-            <img src={product.img[0]} alt="" />
+            <Swiper navigation={true} modules={[Navigation]}>
+              {product.img.map(function (elem) {
+                return (
+                  <SwiperSlide>
+                    <img src={elem} alt="" />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
           </div>
           <div className="full__product-right">
             <div className="product__right-header">
-              <Link to={`/`}>
-                <p>главная</p>
+              <Link className="product__right-link" to={`/`}>
+                главная
               </Link>
               <p className="header__triangle"></p>
               <p>{product.name}</p>
