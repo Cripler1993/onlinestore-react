@@ -34,4 +34,6 @@ const tagTranslate = {
   classic: "классический",
 };
 
-export { categoryArr, filterArr, tagsArr, tagTranslate };
+const baseUrl = `https://65524c665c69a7790329d96f.mockapi.io/products`;
+
+export { categoryArr, filterArr, tagsArr, tagTranslate, baseUrl };

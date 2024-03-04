@@ -46,7 +46,7 @@ export default function Search({ text, setText, setCurrentPage }) {
         </svg>
         <div className="search__input">
           <input
-            onChange={(e) => handleChange(e)}
+            onChange={handleChange}
             value={text}
             type="text"
             placeholder="слойка, торт, кекс..."

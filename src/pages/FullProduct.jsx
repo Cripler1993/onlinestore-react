@@ -6,6 +6,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import axios from "axios";
+import { baseUrl } from "../utiles/constants";
 
 export default function FullProduct() {
   const [isOpenNutrition, setIsopenNutrition] = useState(false);
@@ -16,15 +17,11 @@ export default function FullProduct() {
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get(`https://65524c665c69a7790329d96f.mockapi.io/products/${id}`)
-      .then((json) => {
-        setProduct(json.data);
-        setLoading(false);
-      });
+    axios.get(`${baseUrl}/${id}`).then((json) => {
+      setProduct(json.data);
+      setLoading(false);
+    });
   }, []);
-
-  console.log(product);
 
   function handleOpenNutrition() {
     setIsopenNutrition((prev) => !prev);
@@ -41,9 +38,9 @@ export default function FullProduct() {
         <div className="full__product-row">
           <div className="full__product-left">
             <Swiper navigation={true} modules={[Navigation]}>
-              {product.img.map(function (elem) {
+              {product.img.map(function (elem, index) {
                 return (
-                  <SwiperSlide>
+                  <SwiperSlide key={index}>
                     <img src={elem} alt="" />
                   </SwiperSlide>
                 );
@@ -127,7 +124,7 @@ export default function FullProduct() {
                   <path
                     d="M12 5v14m-7-7h14"
                     stroke="#0E0E0E"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                   ></path>
                 </svg>
               </div>
