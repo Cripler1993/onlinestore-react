@@ -5,21 +5,17 @@ import Tags from "./Tags";
 import * as _ from "lodash";
 import Pagination from "./Pagination";
 import SkeletonItem from "./SkeletonItem";
+import { useSelector } from "react-redux";
 
 export default function Catalog({
   products,
-  category,
-  filter,
-  setFilter,
   handleActive,
   activeClass,
-  text,
   activeTags,
-  currentPage,
-  setCurrentPage,
-  limit,
   loading,
 }) {
+  const { currentPage, limit } = useSelector((store) => store.pagination);
+  const { text, category } = useSelector((store) => store.filter);
   function filterProducts(arr) {
     let searchArr = arr.filter(function (elem) {
       return (
@@ -48,7 +44,7 @@ export default function Catalog({
           <span className="catalog__count">{products.length} товаров</span>
         </div>
         <div>
-          <SortDropDown filter={filter} setFilter={setFilter} />
+          <SortDropDown />
         </div>
       </div>
       <div>
@@ -64,12 +60,7 @@ export default function Catalog({
             })}
       </div>
       <div>
-        <Pagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          filteredProducts={filteredProducts}
-          limit={limit}
-        />
+        <Pagination filteredProducts={filteredProducts} />
       </div>
     </div>
   );

@@ -1,19 +1,10 @@
 import React from "react";
 import DropDown from "./DropDown";
 
-export default function Filter({
-  category,
-  setCategory,
-  clearFilters,
-  setCurrentPage,
-}) {
+export default function Filter({ clearFilters }) {
   return (
     <div className="filter">
-      <DropDown
-        category={category}
-        setCategory={setCategory}
-        setCurrentPage={setCurrentPage}
-      />
+      <DropDown />
       <button className="clear__filter-btn" onClick={clearFilters}>
         сбросить все фильтры
       </button>

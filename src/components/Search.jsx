@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearPage } from "../redux/slices/paginationReducer";
+import { setText } from "../redux/slices/filterReducer";
 
-export default function Search({ text, setText, setCurrentPage }) {
+export default function Search({}) {
+  const { text } = useSelector((store) => store.filter);
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
   function openSearch() {
     setIsOpen(true);
   }
@@ -9,8 +14,8 @@ export default function Search({ text, setText, setCurrentPage }) {
     setIsOpen(false);
   }
   function handleChange(e) {
-    setCurrentPage(1);
-    setText(e.target.value);
+    dispatch(clearPage());
+    dispatch(setText(e.target.value));
   }
 
   return (

@@ -3,28 +3,33 @@ import Header from "../components/Header";
 import Filter from "../components/Filter";
 import Catalog from "../components/Catalog";
 import Footer from "../components/Footer";
-import { baseUrl, categoryArr, filterArr } from "../utiles/constants";
+import { baseUrl, filterArr } from "../utiles/constants";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { clearPage } from "../redux/slices/paginationReducer";
+import {
+  clearCategory,
+  clearFilter,
+  clearText,
+} from "../redux/slices/filterReducer";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-  const [category, setCategory] = useState(categoryArr[0]);
-  const [filter, setFilter] = useState(filterArr[0]);
+  const { category, filter } = useSelector((store) => store.filter);
+  // const [filter, setFilter] = useState(filterArr[0]);
   const [activeTags, setActiveTags] = useState([]);
-  const [text, setText] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const limit = 6;
+  const dispatch = useDispatch();
 
   function clearFilters() {
-    setCategory(categoryArr[0]);
-    setFilter(filterArr[0]);
+    dispatch(clearCategory());
+    dispatch(clearFilter());
     setActiveTags([]);
-    setText("");
+    dispatch(clearText());
   }
 
   function handleActive(elem) {
-    setCurrentPage(1);
+    dispatch(clearPage());
     if (activeClass(elem)) {
       setActiveTags((prev) =>
         prev.filter(function (element) {
@@ -54,27 +59,15 @@ export default function Home() {
   }, [category, filter]);
   return (
     <>
-      <Header text={text} setText={setText} setCurrentPage={setCurrentPage} />
+      <Header />
       <div className="container">
         <main className="main__row">
-          <Filter
-            category={category}
-            setCategory={setCategory}
-            clearFilters={clearFilters}
-            setCurrentPage={setCurrentPage}
-          />
+          <Filter clearFilters={clearFilters} />
           <Catalog
             products={products}
-            category={category}
-            filter={filter}
-            setFilter={setFilter}
             handleActive={handleActive}
             activeClass={activeClass}
-            text={text}
             activeTags={activeTags}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            limit={limit}
             loading={loading}
           />
         </main>

@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { categoryArr } from "../utiles/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { clearPage } from "../redux/slices/paginationReducer";
+import { setCategory } from "../redux/slices/filterReducer";
 
-export default function DropDown({ category, setCategory, setCurrentPage }) {
+export default function DropDown({}) {
+  const { category } = useSelector((store) => store.filter);
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useDispatch();
   let rotateIcon = isOpen ? "rotate__icon" : "";
   function handleOpen() {
     setIsOpen((prev) => !prev);
   }
   function handleClick(elem) {
-    setCategory(elem);
-    setCurrentPage(1);
+    dispatch(setCategory(elem));
+    dispatch(clearPage());
   }
   return (
     <div className="drop">
