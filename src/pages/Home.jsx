@@ -8,36 +8,23 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { clearPage } from "../redux/slices/paginationReducer";
 import {
-  clearCategory,
-  clearFilter,
-  clearText,
+  addActiveTag,
+  removeActiveTag,
+  selectCurrentTag,
 } from "../redux/slices/filterReducer";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-  const { category, filter } = useSelector((store) => store.filter);
-  // const [filter, setFilter] = useState(filterArr[0]);
-  const [activeTags, setActiveTags] = useState([]);
+  const { category, filter, activeTags } = useSelector((store) => store.filter);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-
-  function clearFilters() {
-    dispatch(clearCategory());
-    dispatch(clearFilter());
-    setActiveTags([]);
-    dispatch(clearText());
-  }
 
   function handleActive(elem) {
     dispatch(clearPage());
     if (activeClass(elem)) {
-      setActiveTags((prev) =>
-        prev.filter(function (element) {
-          return element != elem;
-        })
-      );
+      dispatch(removeActiveTag(elem));
     } else {
-      setActiveTags((prev) => [...prev, elem]);
+      dispatch(addActiveTag(elem));
     }
   }
 
@@ -62,12 +49,11 @@ export default function Home() {
       <Header />
       <div className="container">
         <main className="main__row">
-          <Filter clearFilters={clearFilters} />
+          <Filter />
           <Catalog
             products={products}
             handleActive={handleActive}
             activeClass={activeClass}
-            activeTags={activeTags}
             loading={loading}
           />
         </main>

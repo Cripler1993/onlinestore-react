@@ -15,29 +15,39 @@ export const filterSlice = createSlice({
     setText: (state, action) => {
       state.text = action.payload;
     },
-    clearText: (state, action) => {
-      state.text = "";
-    },
     setCategory: (state, action) => {
       state.category = action.payload;
-    },
-    clearCategory: (state, action) => {
-      state.category = categoryArr[0];
     },
     setFilter: (state, action) => {
       state.filter = action.payload;
     },
-    clearFilter: (state, action) => {
+    removeActiveTag: (state, action) => {
+      state.activeTags = state.activeTags.filter((element) => {
+        return element != action.payload;
+      });
+    },
+    addActiveTag: (state, action) => {
+      state.activeTags = [...state.activeTags, action.payload];
+    },
+    clearFilters: (state, action) => {
+      state.activeTags = [];
       state.filter = filterArr[0];
+      state.category = categoryArr[0];
+      state.text = "";
     },
   },
 });
+
+// export const selectCurrentTag = (elem) => (state) => {
+//   return state.activeTags.find((element) => element == elem);
+// };
+
 export const {
-  clearText,
   setText,
   setCategory,
-  clearCategory,
   setFilter,
-  clearFilter,
+  removeActiveTag,
+  addActiveTag,
+  clearFilters,
 } = filterSlice.actions;
 export default filterSlice.reducer;

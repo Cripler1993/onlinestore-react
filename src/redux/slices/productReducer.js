@@ -1,0 +1,26 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { baseUrl } from "../../utiles/constants";
+import axios from "axios";
+
+const initialState = { loading: true, product: {} };
+
+export const fetchProduct = createAsyncThunk("product/fetchProduct", (id) => {
+  return axios.get(`${baseUrl}/${id}`).then((json) => json.data);
+});
+export const productSlice = createSlice({
+  name: "product",
+  initialState,
+  extraReducers: (builder) => {
+    builder.addCase(fetchProduct.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchProduct.fulfilled, (state, action) => {
+      state.loading = false;
+      state.product = action.payload;
+    });
+    builder.addCase(fetchProduct.rejected, (state, action) => {
+      state.loading = false;
+    });
+  },
+});
+export default productSlice.reducer;

@@ -7,20 +7,18 @@ import "swiper/css";
 import "swiper/css/navigation";
 import axios from "axios";
 import { baseUrl } from "../utiles/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProduct } from "../redux/slices/productReducer";
 
 export default function FullProduct() {
   const [isOpenNutrition, setIsopenNutrition] = useState(false);
   const [isOpenConsist, setIsopenConsist] = useState(false);
-  const [product, setProduct] = useState({});
-  const [loading, setLoading] = useState(true);
+  const { loading, product } = useSelector((store) => store.product);
+  const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
-    setLoading(true);
-    axios.get(`${baseUrl}/${id}`).then((json) => {
-      setProduct(json.data);
-      setLoading(false);
-    });
+    dispatch(fetchProduct(id));
   }, []);
 
   function handleOpenNutrition() {
