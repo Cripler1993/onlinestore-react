@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { store } from "../redux/store";
 import { setFilter } from "../redux/slices/filterReducer";
 
-export default function SortDropDown({}) {
+export default function SortDropDown() {
   const { filter } = useSelector((store) => store.filter);
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);

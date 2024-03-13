@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import CartItem from "./CartItem";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../redux/slices/cartReducer";
 
 export default function Cart() {
+  const { cartArr } = useSelector((store) => store.cart);
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   function openCart() {
     setIsOpen((prev) => !prev);
   }
+  console.log(cartArr);
   return (
     <div>
       <svg
@@ -56,37 +62,20 @@ export default function Cart() {
       >
         <div className="cart__header">
           <p>корзина</p>
-          <p>пусто</p>
+          {cartArr.length == 0 ? (
+            <p>пусто</p>
+          ) : cartArr.length == 1 ? (
+            <p>{cartArr.length} товар</p>
+          ) : cartArr.length < 5 ? (
+            <p>{cartArr.length} товарa</p>
+          ) : (
+            <p>{cartArr.length} товаров</p>
+          )}
         </div>
-        <div className="cart__order">
-          <div className="order__left">
-            <img
-              src="https://imgproxy.bushe.ru/Dhp_xBSGbdpjkoz45MIOj_ax67cZR0EiMkGT3RUh748/q:85/w:800/h:800/rt:fit/el:1/czM6Ly9idXNoZS9tZWRpYS9Qcm9kdWN0L2ltYWdlcy8xMDNlYjlhMS1hZTBmLTQ0NzAtYTA1MS1jYmYwOWExZWQ2ODMv0LHQu9C40L3Rh9C40LrQuC3RgS3RgdGL0YDQvtC8LdC4LdCy0LXRgtGH0LjQvdC-0Lkt0LPQvNGBMi5qcGc.webp"
-              alt=""
-            />
-            <div>
-              <p>Омлет</p>
-              <p className="order__left-text">180 г</p>
-              <p className="order__left-text">кол-во:1</p>
-            </div>
-          </div>
-          <div className="order__right">
-            <svg
-              width="16"
-              height="16"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                opacity="0.5"
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M6.94 8L2.803 3.863l1.06-1.06L8 6.939l4.137-4.136 1.06 1.06L9.061 8l4.136 4.136-1.06 1.06L8 9.06l-4.136 4.137-1.06-1.06L6.94 8z"
-                fill="#75787C"
-              ></path>
-            </svg>
-            <p>1000₽</p>
-          </div>
+        <div className="cart__body">
+          {cartArr.map((elem) => {
+            return <CartItem key={elem.id} elem={elem} />;
+          })}
         </div>
         <div>
           <div className="cart__price">
@@ -94,7 +83,9 @@ export default function Cart() {
             <p>1000₽</p>
           </div>
           <div className="cart__btns">
-            <button>торты</button>
+            <button onClick={() => dispatch(clearCart())}>
+              очистить корзину
+            </button>
             <button>продукты</button>
           </div>
         </div>

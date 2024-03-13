@@ -2,7 +2,7 @@ import React from "react";
 import Search from "./Search";
 import Cart from "./Cart";
 
-export default function Header({}) {
+export default function Header() {
   return (
     <header>
       <div className="container">

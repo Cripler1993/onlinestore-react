@@ -5,10 +5,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-import axios from "axios";
-import { baseUrl } from "../utiles/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "../redux/slices/productReducer";
+import { addItem } from "../redux/slices/cartReducer";
 
 export default function FullProduct() {
   const [isOpenNutrition, setIsopenNutrition] = useState(false);
@@ -127,7 +126,9 @@ export default function FullProduct() {
                 </svg>
               </div>
               <div className="product__footer-btn">
-                <button>{product.price}₽ в корзину</button>
+                <button onClick={() => dispatch(addItem(product))}>
+                  {product.price}₽ в корзину
+                </button>
               </div>
             </div>
           </div>

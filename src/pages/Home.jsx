@@ -1,22 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Header from "../components/Header";
 import Filter from "../components/Filter";
 import Catalog from "../components/Catalog";
 import Footer from "../components/Footer";
-import { baseUrl, filterArr } from "../utiles/constants";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { clearPage } from "../redux/slices/paginationReducer";
-import {
-  addActiveTag,
-  removeActiveTag,
-  selectCurrentTag,
-} from "../redux/slices/filterReducer";
+import { addActiveTag, removeActiveTag } from "../redux/slices/filterReducer";
+import { fetchProducts } from "../redux/slices/productsReducer";
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
   const { category, filter, activeTags } = useSelector((store) => store.filter);
-  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
   function handleActive(elem) {
@@ -34,15 +27,11 @@ export default function Home() {
     });
   }
   useEffect(() => {
-    setLoading(true);
     const params = new URLSearchParams();
     params.append("category", category.value);
     params.append("sortBy", filter.value.sortBy);
     params.append("order", filter.value.order);
-    axios.get(baseUrl, { params }).then((json) => {
-      setProducts(json.data);
-      setLoading(false);
-    });
+    dispatch(fetchProducts(params));
   }, [category, filter]);
   return (
     <>
@@ -50,12 +39,7 @@ export default function Home() {
       <div className="container">
         <main className="main__row">
           <Filter />
-          <Catalog
-            products={products}
-            handleActive={handleActive}
-            activeClass={activeClass}
-            loading={loading}
-          />
+          <Catalog handleActive={handleActive} activeClass={activeClass} />
         </main>
       </div>
       <Footer />

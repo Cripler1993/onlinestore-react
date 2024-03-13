@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import CatalogItem from "./CatalogItem";
 import SortDropDown from "./SortDropDown";
 import Tags from "./Tags";
@@ -7,14 +6,10 @@ import Pagination from "./Pagination";
 import SkeletonItem from "./SkeletonItem";
 import { useSelector } from "react-redux";
 
-export default function Catalog({
-  products,
-  handleActive,
-  activeClass,
-  loading,
-}) {
+export default function Catalog({ handleActive, activeClass }) {
   const { currentPage, limit } = useSelector((store) => store.pagination);
   const { text, category, activeTags } = useSelector((store) => store.filter);
+  const { loading, products } = useSelector((store) => store.products);
 
   function filterProducts(arr) {
     let searchArr = arr.filter(function (elem) {

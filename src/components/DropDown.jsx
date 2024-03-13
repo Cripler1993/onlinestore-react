@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearPage } from "../redux/slices/paginationReducer";
 import { setCategory } from "../redux/slices/filterReducer";
 
-export default function DropDown({}) {
+export default function DropDown() {
   const { category } = useSelector((store) => store.filter);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();

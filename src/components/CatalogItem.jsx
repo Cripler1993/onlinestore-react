@@ -2,8 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { tagTranslate } from "../utiles/constants";
 import { Tooltip } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { addItem } from "../redux/slices/cartReducer";
 
 export default function CatalogItem({ elem }) {
+  const dispatch = useDispatch();
   return (
     <div className="catalog__item">
       <div className="catalog__img">
@@ -11,7 +14,7 @@ export default function CatalogItem({ elem }) {
           <img src={elem.img[0]} alt="" />
         </Link>
         <Tooltip title="добавить в корзину" arrow>
-          <div className="catalog__svg">
+          <div onClick={() => dispatch(addItem(elem))} className="catalog__svg">
             <svg
               width="24"
               height="24"
