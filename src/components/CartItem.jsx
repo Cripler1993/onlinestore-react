@@ -1,6 +1,12 @@
-import React from "react";
+import { useDispatch } from "react-redux";
+import {
+  addItem,
+  decreaseItemQuantity,
+  deleteItem,
+} from "../redux/slices/cartReducer";
 
 export default function CartItem({ elem }) {
+  const dispatch = useDispatch();
   return (
     <div className="cart__order">
       <div className="order__left">
@@ -8,11 +14,28 @@ export default function CartItem({ elem }) {
         <div>
           <p>{elem.name}</p>
           <p className="order__left-text">{elem.serving_size}</p>
-          <p className="order__left-text">кол-во:{elem.count}</p>
+          <p className="order__left-text order__left-row">
+            кол-во:
+            <button
+              disabled={elem.count == 1}
+              onClick={() => dispatch(decreaseItemQuantity(elem))}
+              className="order__left-btn"
+            >
+              -
+            </button>
+            <span>{elem.count}</span>
+            <button
+              onClick={() => dispatch(addItem(elem))}
+              className="order__left-btn"
+            >
+              +
+            </button>
+          </p>
         </div>
       </div>
       <div className="order__right">
         <svg
+          onClick={() => dispatch(deleteItem(elem))}
           width="16"
           height="16"
           fill="none"
@@ -26,7 +49,7 @@ export default function CartItem({ elem }) {
             fill="#75787C"
           ></path>
         </svg>
-        <p>{elem.price}₽</p>
+        <p>{elem.price * elem.count}₽</p>
       </div>
     </div>
   );

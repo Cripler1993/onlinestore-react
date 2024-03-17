@@ -1,4 +1,3 @@
-import React from "react";
 import DropDown from "./DropDown";
 import { useDispatch } from "react-redux";
 import { clearFilters } from "../redux/slices/filterReducer";

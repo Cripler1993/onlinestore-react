@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import SkeletonFullProduct from "../components/SkeletonFullProduct";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -7,7 +7,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProduct } from "../redux/slices/productReducer";
-import { addItem } from "../redux/slices/cartReducer";
+import {
+  addItem,
+  decreaseItemQuantity,
+  selectCurrentCartItem,
+} from "../redux/slices/cartReducer";
 
 export default function FullProduct() {
   const [isOpenNutrition, setIsopenNutrition] = useState(false);
@@ -15,6 +19,7 @@ export default function FullProduct() {
   const { loading, product } = useSelector((store) => store.product);
   const dispatch = useDispatch();
   const { id } = useParams();
+  const cartItem = useSelector(selectCurrentCartItem(id));
 
   useEffect(() => {
     dispatch(fetchProduct(id));
@@ -102,32 +107,45 @@ export default function FullProduct() {
               <div className="consist__full">{product.consist}</div>
             )}
             <div className="full__product-footer">
-              <div className="product__footer-counter">
-                <svg
-                  width="24"
-                  height="24"
-                  fill="#000"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path stroke="#0E0E0E" d="M5 12h14"></path>
-                </svg>
-                <span>1</span>
-                <svg
-                  width="24"
-                  height="24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12 5v14m-7-7h14"
-                    stroke="#0E0E0E"
-                    strokeWidth="1.5"
-                  ></path>
-                </svg>
-              </div>
+              {cartItem && (
+                <div className="product__footer-counter">
+                  <button
+                    disabled={cartItem.count == 1}
+                    onClick={() => dispatch(decreaseItemQuantity(product))}
+                    className="order__left-btn"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      fill="#000"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path stroke="#0E0E0E" d="M5 12h14"></path>
+                    </svg>
+                  </button>
+                  <span>{cartItem.count}</span>
+                  <button
+                    onClick={() => dispatch(addItem(product))}
+                    className="order__left-btn"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12 5v14m-7-7h14"
+                        stroke="#0E0E0E"
+                        strokeWidth="1.5"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+              )}
               <div className="product__footer-btn">
                 <button onClick={() => dispatch(addItem(product))}>
-                  {product.price}₽ в корзину
+                  {!cartItem ? `${product.price}₽ в корзину` : `В корзинe`}
                 </button>
               </div>
             </div>

@@ -38,10 +38,6 @@ export const filterSlice = createSlice({
   },
 });
 
-// export const selectCurrentTag = (elem) => (state) => {
-//   return state.activeTags.find((element) => element == elem);
-// };
-
 export const {
   setText,
   setCategory,

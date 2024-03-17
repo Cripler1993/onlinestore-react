@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearPage } from "../redux/slices/paginationReducer";
 import { setText } from "../redux/slices/filterReducer";

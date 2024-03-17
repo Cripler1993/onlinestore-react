@@ -202,6 +202,15 @@ header {
   line-height: 16px;
   color: rgb(202, 205, 208);
 }
+.order__left-row {
+  display: flex;
+  align-items: center;
+  column-gap: 7px;
+}
+.order__left-btn {
+  background: none;
+  font-size: 16px;
+}
 .order__right {
   display: flex;
   flex-direction: column;

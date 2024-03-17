@@ -1,4 +1,3 @@
-import React from "react";
 import Search from "./Search";
 import Cart from "./Cart";
 
@@ -9,7 +8,6 @@ export default function Header() {
         <div className="header__row">
           <div className="header__left">
             <p className="header__title">Буше</p>
-            <p>продукция</p>
           </div>
           <div className="header__right">
             <Search />
