@@ -1,6 +1,5 @@
 import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
-
 import React from "react";
 
 export default function CartSnackBar({ isOpen, setIsOpen }) {

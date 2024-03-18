@@ -4,12 +4,15 @@ import Tags from "./Tags";
 import * as _ from "lodash";
 import Pagination from "./Pagination";
 import SkeletonItem from "./SkeletonItem";
+import CartSnackBar from "./CartSnackBar";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 export default function Catalog({ handleActive, activeClass }) {
   const { currentPage, limit } = useSelector((store) => store.pagination);
   const { text, category, activeTags } = useSelector((store) => store.filter);
   const { loading, products } = useSelector((store) => store.products);
+  const [isOpen, setIsOpen] = useState(false);
 
   function filterProducts(arr) {
     let searchArr = arr.filter(function (elem) {
@@ -53,12 +56,15 @@ export default function Catalog({ handleActive, activeClass }) {
               return <SkeletonItem key={index} />;
             })
           : sliceArr.map(function (elem) {
-              return <CatalogItem key={elem.id} elem={elem} />;
+              return (
+                <CatalogItem key={elem.id} elem={elem} setIsOpen={setIsOpen} />
+              );
             })}
       </div>
       <div>
         <Pagination filteredProducts={filteredProducts} />
       </div>
+      <CartSnackBar isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 }

@@ -1,15 +1,13 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { tagTranslate } from "../utiles/constants";
-import { Snackbar, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, selectCurrentCartItem } from "../redux/slices/cartReducer";
-import CartSnackBar from "./CartSnackBar";
 
-export default function CatalogItem({ elem }) {
+export default function CatalogItem({ elem, setIsOpen }) {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCurrentCartItem(elem.id));
-  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="catalog__item">
       <div className="catalog__img">
@@ -44,7 +42,6 @@ export default function CatalogItem({ elem }) {
             );
           })}
         </div>
-        <CartSnackBar isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
       <div className="catalog__info">
         <p className="catalog__name">{elem.name}</p>
