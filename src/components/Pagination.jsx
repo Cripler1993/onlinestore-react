@@ -1,11 +1,9 @@
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { nextPage, previousPage } from "../redux/slices/paginationReducer";
 
-export default function Pagination({
-  currentPage,
-  setCurrentPage,
-  limit,
-  filteredProducts,
-}) {
+export default function Pagination({ filteredProducts }) {
+  const { currentPage, limit } = useSelector((store) => store.pagination);
+  const dispatch = useDispatch();
   let maxPage = Math.ceil(filteredProducts.length / limit);
   return (
     <div className="pagination">
@@ -13,7 +11,7 @@ export default function Pagination({
         <button
           className="pagination__btn"
           disabled={currentPage == 1}
-          onClick={() => setCurrentPage((prev) => prev - 1)}
+          onClick={() => dispatch(previousPage())}
         >
           <svg
             className="rotate__svg"
@@ -33,7 +31,7 @@ export default function Pagination({
         <button
           className="pagination__btn"
           disabled={currentPage == maxPage}
-          onClick={() => setCurrentPage((prev) => prev + 1)}
+          onClick={() => dispatch(nextPage())}
         >
           <svg
             width="20"

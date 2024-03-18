@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { filterArr } from "../utiles/constants";
 import { Tooltip } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { store } from "../redux/store";
+import { setFilter } from "../redux/slices/filterReducer";
 
-export default function SortDropDown({ filter, setFilter }) {
+export default function SortDropDown() {
+  const { filter } = useSelector((store) => store.filter);
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   function handleOpen() {
     setIsOpen((prev) => !prev);
@@ -40,7 +45,7 @@ export default function SortDropDown({ filter, setFilter }) {
           {filterArr.map(function (elem) {
             return (
               <button
-                onClick={() => setFilter(elem)}
+                onClick={() => dispatch(setFilter(elem))}
                 className={
                   elem.label == filter.label
                     ? "filter__btn filter__active"

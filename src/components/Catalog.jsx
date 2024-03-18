@@ -1,25 +1,19 @@
-import React, { useState } from "react";
 import CatalogItem from "./CatalogItem";
 import SortDropDown from "./SortDropDown";
 import Tags from "./Tags";
 import * as _ from "lodash";
 import Pagination from "./Pagination";
 import SkeletonItem from "./SkeletonItem";
+import CartSnackBar from "./CartSnackBar";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
-export default function Catalog({
-  products,
-  category,
-  filter,
-  setFilter,
-  handleActive,
-  activeClass,
-  text,
-  activeTags,
-  currentPage,
-  setCurrentPage,
-  limit,
-  loading,
-}) {
+export default function Catalog({ handleActive, activeClass }) {
+  const { currentPage, limit } = useSelector((store) => store.pagination);
+  const { text, category, activeTags } = useSelector((store) => store.filter);
+  const { loading, products } = useSelector((store) => store.products);
+  const [isOpen, setIsOpen] = useState(false);
+
   function filterProducts(arr) {
     let searchArr = arr.filter(function (elem) {
       return (
@@ -28,12 +22,14 @@ export default function Catalog({
       );
     });
     if (activeTags.length > 0) {
+      let activeTagsCopy = [...activeTags];
       return searchArr.filter(function (elem) {
-        return _.isEqual(activeTags.sort(), elem.tags.sort());
+        return _.isEqual(activeTagsCopy.sort(), elem.tags.sort());
       });
     }
     return searchArr;
   }
+
   let filteredProducts = filterProducts(products);
   let start = limit * (currentPage - 1);
   let finish = limit * currentPage;
@@ -48,7 +44,7 @@ export default function Catalog({
           <span className="catalog__count">{products.length} товаров</span>
         </div>
         <div>
-          <SortDropDown filter={filter} setFilter={setFilter} />
+          <SortDropDown />
         </div>
       </div>
       <div>
@@ -60,17 +56,15 @@ export default function Catalog({
               return <SkeletonItem key={index} />;
             })
           : sliceArr.map(function (elem) {
-              return <CatalogItem key={elem.id} elem={elem} />;
+              return (
+                <CatalogItem key={elem.id} elem={elem} setIsOpen={setIsOpen} />
+              );
             })}
       </div>
       <div>
-        <Pagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          filteredProducts={filteredProducts}
-          limit={limit}
-        />
+        <Pagination filteredProducts={filteredProducts} />
       </div>
+      <CartSnackBar isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 }

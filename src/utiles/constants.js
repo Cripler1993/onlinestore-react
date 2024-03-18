@@ -36,4 +36,28 @@ const tagTranslate = {
 
 const baseUrl = `https://65524c665c69a7790329d96f.mockapi.io/products`;
 
-export { categoryArr, filterArr, tagsArr, tagTranslate, baseUrl };
+const getIntlName = (length) => {
+  return length == 0
+    ? "пусто"
+    : length == 1
+    ? `${length} товар`
+    : length < 5
+    ? `${length} товарa`
+    : `${length} товаров`;
+};
+const calcPrice = (state) => {
+  state.totalPrice = state.cartArr.reduce((acc, elem) => {
+    acc += elem.price * elem.count;
+    return acc;
+  }, 0);
+};
+
+export {
+  categoryArr,
+  filterArr,
+  tagsArr,
+  tagTranslate,
+  baseUrl,
+  getIntlName,
+  calcPrice,
+};

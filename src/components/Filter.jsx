@@ -1,20 +1,16 @@
-import React from "react";
 import DropDown from "./DropDown";
+import { useDispatch } from "react-redux";
+import { clearFilters } from "../redux/slices/filterReducer";
 
-export default function Filter({
-  category,
-  setCategory,
-  clearFilters,
-  setCurrentPage,
-}) {
+export default function Filter() {
+  const dispatch = useDispatch();
   return (
     <div className="filter">
-      <DropDown
-        category={category}
-        setCategory={setCategory}
-        setCurrentPage={setCurrentPage}
-      />
-      <button className="clear__filter-btn" onClick={clearFilters}>
+      <DropDown />
+      <button
+        className="clear__filter-btn"
+        onClick={() => dispatch(clearFilters())}
+      >
         сбросить все фильтры
       </button>
     </div>

@@ -138,7 +138,7 @@ header {
   line-height: 28px;
 }
 .cart__header p:last-child {
-  margin-top: 1px;
+  margin-top: 2px;
   font-size: 13px;
   line-height: 14px;
   color: rgba(14, 14, 14, 0.35);
@@ -201,6 +201,15 @@ header {
   font-size: 14px;
   line-height: 16px;
   color: rgb(202, 205, 208);
+}
+.order__left-row {
+  display: flex;
+  align-items: center;
+  column-gap: 7px;
+}
+.order__left-btn {
+  background: none;
+  font-size: 16px;
 }
 .order__right {
   display: flex;

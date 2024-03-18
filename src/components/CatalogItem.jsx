@@ -1,21 +1,29 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { tagTranslate } from "../utiles/constants";
 import { Tooltip } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, selectCurrentCartItem } from "../redux/slices/cartReducer";
 
-export default function CatalogItem({ elem }) {
+export default function CatalogItem({ elem, setIsOpen }) {
+  const dispatch = useDispatch();
+  const cartItem = useSelector(selectCurrentCartItem(elem.id));
+
   return (
     <div className="catalog__item">
       <div className="catalog__img">
         <Link to={`/product/${elem.id}`}>
           <img src={elem.img[0]} alt="" />
         </Link>
-        <Tooltip title="добавить в корзину" arrow>
-          <div className="catalog__svg">
+        <Tooltip
+          title={!cartItem ? "добавить в корзину" : "добавлено в корзину"}
+          arrow
+        >
+          <div onClick={() => dispatch(addItem(elem))} className="catalog__svg">
             <svg
+              onClick={() => setIsOpen(true)}
               width="24"
               height="24"
-              fill="rgb(240, 167, 45)"
+              fill={cartItem ? "rgb(240, 167, 45)" : "#000"}
               xmlns="http://www.w3.org/2000/svg"
             >
               <path

@@ -1,4 +1,3 @@
-import React from "react";
 import { tagTranslate, tagsArr } from "../utiles/constants";
 
 export default function Tags({ handleActive, activeClass }) {
