@@ -23,9 +23,9 @@ export default function Catalog({ handleActive, activeClass }) {
     });
     if (activeTags.length > 0) {
       let activeTagsCopy = [...activeTags];
-      return searchArr.filter(function (elem) {
-        return _.isEqual(activeTagsCopy.sort(), elem.tags.sort());
-      });
+      // return searchArr.filter(function (elem) {
+      //   return _.isEqual(activeTagsCopy.sort(), elem.tags.sort());
+      // });
     }
     return searchArr;
   }
