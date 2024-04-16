@@ -22,10 +22,11 @@ export default function Catalog({ handleActive, activeClass }) {
       );
     });
     if (activeTags.length > 0) {
-      let activeTagsCopy = [...activeTags];
-      // return searchArr.filter(function (elem) {
-      //   return _.isEqual(activeTagsCopy.sort(), elem.tags.sort());
-      // });
+      let activeTagsCopy = activeTags.slice();
+      return searchArr.filter(function (elem) {
+        let copyTags = elem.tags.slice();
+        return _.isEqual(activeTagsCopy.sort(), copyTags.sort());
+      });
     }
     return searchArr;
   }

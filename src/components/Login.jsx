@@ -1,10 +1,24 @@
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 import Registration from "./Registration";
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import * as Yup from "yup";
 
 export default function Login({ setIsOpen }) {
+  const initialValues = { email: "ffff", password: "dddd" };
   const [changeModal, setChangeModal] = useState(true);
+  const validationSchema = Yup.object().shape({
+    email: Yup.string("введите корректный email")
+      .email("введите корректный email")
+      .required("введите email"),
+    password: Yup.string("введите корректный пароль")
+      .required("введите пароль")
+      .min(6, "пароль слишком короткий")
+      .max(30, "пароль слишком длинный"),
+  });
+
+  function handleSubmit(values) {
+    console.log(values);
+  }
   return (
     <div className="modal__open">
       <div
@@ -27,48 +41,49 @@ export default function Login({ setIsOpen }) {
             ></path>
           </svg>
         </div>
-        <div className="modal__inputs">
-          <Box
-            sx={{
-              width: 500,
-              maxWidth: "100%",
-              "& .MuiInputBase-root": {
-                border: "1px solid rgba(14, 14, 14, 0.08)",
-                outline: "none",
-                color: "rgba(14, 14, 14, 0.3)",
-                opacity: "1",
-                marginBottom: "20px",
-              },
-              "& ::placeholder": {
-                color: "orange",
-              },
-              // "& .Mui-focused": {
-              //   color: "black",
-              //   border: "1px solid black",
-              //   outline: "none",
-              // },
-            }}
-          >
-            <TextField
-              fullWidth
-              label="телефон или email"
-              id="fullWidth"
-
-              // focused
-            />
-            <TextField
-              fullWidth
-              label="пароль"
-              id="fullWidth"
-              type="password"
-              // label="Outlined secondary"
-              // color="orange"
-              // focused
-            />
-          </Box>
-          <button className="modal__btn">войти</button>
-        </div>
-
+        <Formik
+          validationSchema={validationSchema}
+          initialValues={initialValues}
+          onSubmit={handleSubmit}
+        >
+          {({ values, isValid, dirty }) => {
+            // console.log(values);
+            return (
+              <Form className="modal__inputs">
+                <div className="form-item">
+                  <Field name="email" id="email" type="text" required />
+                  <label htmlFor="email">email</label>
+                  <ErrorMessage
+                    name="email"
+                    component={"span"}
+                    className="error"
+                  />
+                </div>
+                <div className="form-item">
+                  <Field
+                    name="password"
+                    id="password"
+                    type="password"
+                    required
+                  />
+                  <label htmlFor="password">пароль</label>
+                  <ErrorMessage
+                    name="password"
+                    component={"span"}
+                    className="error"
+                  />
+                </div>
+                <button
+                  disabled={!(dirty && isValid)}
+                  className="modal__btn"
+                  type="submit"
+                >
+                  войти
+                </button>
+              </Form>
+            );
+          }}
+        </Formik>
         <div className="modal__footer">
           <p onClick={() => setChangeModal(false)}>регистрация</p>
           <svg

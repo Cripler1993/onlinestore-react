@@ -48,9 +48,9 @@ textarea {
 }
 /* убираем некоторые особенности в разных браузерах
   специфический псевдоэлемент */
-input::-ms-clear {
+/* input::-ms-clear {
   display: none;
-}
+} */
 button {
   cursor: pointer;
 }

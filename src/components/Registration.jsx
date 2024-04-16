@@ -1,4 +1,3 @@
-// import { withStyles } from "@material-ui/core/styles";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import React from "react";
@@ -8,27 +7,6 @@ export default function Registration({
   setChangeModal,
   changeModal,
 }) {
-  // const CssTextField = withStyles({
-  //   root: {
-  //     "& label.Mui-focused": {
-  //       color: "green",
-  //     },
-  //     "& .MuiInput-underline:after": {
-  //       borderBottomColor: "green",
-  //     },
-  //     "& .MuiOutlinedInput-root": {
-  //       "& fieldset": {
-  //         borderColor: "red",
-  //       },
-  //       "&:hover fieldset": {
-  //         borderColor: "yellow",
-  //       },
-  //       "&.Mui-focused fieldset": {
-  //         borderColor: "green",
-  //       },
-  //     },
-  //   },
-  // })(TextField);
   return (
     <div
       className={
@@ -53,70 +31,22 @@ export default function Registration({
         </svg>
       </div>
       <div className="modal__inputs">
-        <Box
-          sx={{
-            width: 500,
-            maxWidth: "100%",
-            // "& .MuiInputBase-root": {
-            //   border: "1px solid rgba(14, 14, 14, 0.08)",
-            //   outline: "none",
-            //   color: "rgba(14, 14, 14, 0.3)",
-            //   opacity: "1",
-            //   marginBottom: "20px",
-            //   "& label.Mui-focused": {
-            //     color: "green",
-            //   },
-            //   "& .MuiInputBase-input": {
-            //     "&:focus": {
-            //       color: "black",
-            //       border: "1px solid black",
-            //       outline: "none",
-            //     },
-            //     "&:hover": {
-            //       border: "none",
-            //       outline: "none",
-            //     },
-            //   },
-            // },
-          }}
-        >
-          {/* <CssTextField
-            fullWidth
-            id="fullWidth"
-            label="телефон"
-            //   defaultValue="+"
-            type="tel"
-            // label="Outlined secondary"
-            // color="orange"
-            // focused
-          /> */}
-          <TextField
-            fullWidth
-            label="email"
-            id="fullWidth"
-            // label="Outlined secondary"
-            // color="orange"
-            // focused
-          />
-          <TextField
-            fullWidth
-            label="пароль"
-            id="fullWidth"
-            type="password"
-            // label="Outlined secondary"
-            // color="orange"
-            // focused
-          />
-          <TextField
-            fullWidth
-            label="пароль еще раз"
-            id="fullWidth"
-            type="password"
-            // label="Outlined secondary"
-            // color="orange"
-            // focused
-          />
-        </Box>
+        <div className="form-item">
+          <input id="email" type="tel" required />
+          <label htmlFor="email">телефон</label>
+        </div>
+        <div className="form-item">
+          <input id="password" type="text" required />
+          <label htmlFor="password">email</label>
+        </div>
+        <div className="form-item">
+          <input id="password" type="password" required />
+          <label htmlFor="password">пароль</label>
+        </div>
+        <div className="form-item">
+          <input id="password" type="password" required />
+          <label htmlFor="password">пароль еще раз</label>
+        </div>
         <button className="modal__btn">регистрация</button>
       </div>
       <div className="modal__footer">
